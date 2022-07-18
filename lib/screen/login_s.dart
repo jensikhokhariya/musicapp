@@ -12,7 +12,6 @@ class _Login_sState extends State<Login_s> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(),
         body: Container(
           height: double.infinity,
           width: double.infinity,
@@ -21,11 +20,15 @@ class _Login_sState extends State<Login_s> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pushNamed(context, 'song');
+                },
                 child: Text("Audio song"),
               ),
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pushNamed(context, 'videos');
+                },
                 child: Text("Video song"),
               ),
             ],
