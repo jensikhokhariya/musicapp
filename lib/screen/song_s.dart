@@ -34,7 +34,7 @@ class _Song_SState extends State<Song_S> {
   void initState() {
     super.initState();
     assetsAudioPlayer.open(
-      Audio("assets/music/bb.mp3"),
+      Audio("${songlist}"),
       autoStart: false,
       showNotification: false,
     );
@@ -122,6 +122,8 @@ class _Song_SState extends State<Song_S> {
                               onChanged: (value) {
                                 assetsAudioPlayer
                                     .seek(Duration(seconds: value.toInt()));
+
+                                Text("=============> $cdu");
                               },
                             ),
                             Text("$duration/$tdu",style: TextStyle(fontWeight: FontWeight.bold),),
