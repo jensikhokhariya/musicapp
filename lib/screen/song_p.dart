@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:musicapp/data.dart';
 import 'package:musicapp/screen/model.dart';
 
 class Song_Screen extends StatefulWidget {
@@ -74,6 +75,8 @@ class _Song_ScreenState extends State<Song_Screen> {
               return GestureDetector(
                 onTap: () {
                   Imagelist l2 = Imagelist(nm[index], imgs[index], songlist[index]);
+                  audiolink = songlist[index];
+
                   Navigator.pushNamed(context, 'spngp', arguments: l2);
                 },
                 child: Card(

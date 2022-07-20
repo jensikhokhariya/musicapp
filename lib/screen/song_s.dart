@@ -1,5 +1,6 @@
 import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:flutter/material.dart';
+import 'package:musicapp/data.dart';
 
 import 'model.dart';
 
@@ -16,27 +17,24 @@ class _Song_SState extends State<Song_S> {
   Icon iconmusic = Icon(Icons.play_circle_outline);
   Duration tdu = Duration(seconds: 0);
   Duration cdu = Duration(seconds: 0);
+  Imagelist? l1;
 
-  List songlist = [
-    "assets/music/bb.mp3",
-    "assets/music/bp.mp3",
-    "assets/music/jj.mp3",
-    "assets/music/gangubai.mp3",
-    "assets/music/kgf2.mp3",
-    "assets/music/mitra.mp3",
-    "assets/music/rrr.mp3",
-    "assets/music/pushpa.mp3",
-    "assets/music/atrangire.mp3",
-    "assets/music/beast.mp3",
-  ];
+
 
   @override
   void initState() {
     super.initState();
-    assetsAudioPlayer.open(
-      Audio("${songlist}"),
+    audio1(audiolink!);
+
+    print("=============== $audiolink");
+
+  }
+
+  void audio1(String path) async{
+     await assetsAudioPlayer.open(
+       Audio(path),
       autoStart: false,
-      showNotification: false,
+      showNotification: true,
     );
     assetsAudioPlayer.current.listen((event) {
       tdu = event!.audio.duration;
@@ -45,9 +43,13 @@ class _Song_SState extends State<Song_S> {
 
   @override
   Widget build(BuildContext context) {
-    Imagelist l1 = ModalRoute.of(context)!.settings.arguments as Imagelist;
+    l1 = ModalRoute.of(context)!.settings.arguments as Imagelist;
     return SafeArea(
       child: Scaffold(
+        appBar: AppBar(
+          title: Text("Now playing",style: TextStyle(color: Colors.white),),
+          backgroundColor: Colors.black,
+        ),
         body: Container(
           height: double.infinity,
           width: double.infinity,
@@ -59,7 +61,7 @@ class _Song_SState extends State<Song_S> {
                 child: Opacity(
                   opacity: 0.6,
                   child: Image.asset(
-                    "${l1.imgs}",
+                    "${l1!.imgs}",
                     fit: BoxFit.fill,
                   ),
                 ),
@@ -71,7 +73,7 @@ class _Song_SState extends State<Song_S> {
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(20),
                     child: Image.asset(
-                      "${l1.imgs}",
+                      "${l1!.imgs}",
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -83,7 +85,7 @@ class _Song_SState extends State<Song_S> {
                   width: 300,
                   alignment: Alignment.bottomCenter,
                   child: Text(
-                    "${l1.nm}",
+                    "${l1!.nm}",
                     style: TextStyle(
                         color: Colors.black,
                         fontSize: 21,
@@ -105,23 +107,22 @@ class _Song_SState extends State<Song_S> {
               ),
               Center(
                 child: Container(
-                  height: 700,
+                  height: 600,
                   width: 300,
                   alignment: Alignment.bottomCenter,
                   child: PlayerBuilder.currentPosition(
                       player: assetsAudioPlayer,
                       builder: (context, duration) {
                         return Column(
+                          mainAxisAlignment: MainAxisAlignment.end,
                           children: [
                             Slider(
-                              activeColor: Colors.blue,
-                              inactiveColor: Colors.blue.shade200,
-                              thumbColor: Colors.lightBlue,
+                              activeColor: Colors.black,
+                              inactiveColor: Colors.white,
                               value: duration.inSeconds.toDouble(),
                               max: tdu.inSeconds.toDouble(),
                               onChanged: (value) {
-                                assetsAudioPlayer
-                                    .seek(Duration(seconds: value.toInt()));
+                                assetsAudioPlayer.seek(Duration(seconds: value.toInt()));
 
                                 Text("=============> $cdu");
                               },
@@ -139,17 +140,19 @@ class _Song_SState extends State<Song_S> {
     );
   }
 
-  void playaudio() {
+  void playaudio() async{
+
+
     if (isplay == false) {
-      assetsAudioPlayer.play();
+      await assetsAudioPlayer.play();
       setState(() {
-        isplay = false;
+        isplay = true;
         iconmusic = Icon(Icons.pause_circle_outline);
       });
     } else {
       assetsAudioPlayer.pause();
       setState(() {
-        isplay = true;
+        isplay = false;
         iconmusic = Icon(Icons.play_circle_outline);
       });
     }
