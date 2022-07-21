@@ -1,5 +1,5 @@
 import 'package:shared_preferences/shared_preferences.dart';
-
+import 'dart:math';
 class Shared {
   List l1 = [];
 
@@ -15,8 +15,7 @@ class Shared {
     var email = shr.getString("g1");
     var password = shr.getString("p1");
 
-    l1.add(email);
-    l1.add(password);
+    l1.addAll([email,password]);
     return l1;
   }
 }
