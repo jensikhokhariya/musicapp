@@ -62,7 +62,7 @@ class _Song_SState extends State<Song_S> {
                   opacity: 0.6,
                   child: Image.asset(
                     "${l1!.imgs}",
-                    fit: BoxFit.fill,
+                    fit: BoxFit.cover,
                   ),
                 ),
               ),
@@ -147,7 +147,7 @@ class _Song_SState extends State<Song_S> {
       await assetsAudioPlayer.play();
       setState(() {
         isplay = true;
-        iconmusic = Icon(Icons.pause_circle_outline);
+        iconmusic = Icon(Icons.pause_circle_outline,);
       });
     } else {
       assetsAudioPlayer.pause();
