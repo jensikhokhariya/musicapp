@@ -19,20 +19,17 @@ class _Song_SState extends State<Song_S> {
   Duration cdu = Duration(seconds: 0);
   Imagelist? l1;
 
-
-
   @override
   void initState() {
     super.initState();
     audio1(audiolink!);
 
     print("=============== $audiolink");
-
   }
 
-  void audio1(String path) async{
-     await assetsAudioPlayer.open(
-       Audio(path),
+  void audio1(String path) async {
+    await assetsAudioPlayer.open(
+      Audio(path),
       autoStart: false,
       showNotification: true,
     );
@@ -47,7 +44,10 @@ class _Song_SState extends State<Song_S> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: Text("Now playing",style: TextStyle(color: Colors.white),),
+          title: Text(
+            "Now playing",
+            style: TextStyle(color: Colors.white),
+          ),
           backgroundColor: Colors.black,
         ),
         body: Container(
@@ -122,12 +122,16 @@ class _Song_SState extends State<Song_S> {
                               value: duration.inSeconds.toDouble(),
                               max: tdu.inSeconds.toDouble(),
                               onChanged: (value) {
-                                assetsAudioPlayer.seek(Duration(seconds: value.toInt()));
+                                assetsAudioPlayer
+                                    .seek(Duration(seconds: value.toInt()));
 
                                 Text("=============> $cdu");
                               },
                             ),
-                            Text("$duration/$tdu",style: TextStyle(fontWeight: FontWeight.bold),),
+                            Text(
+                              "$duration/$tdu",
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            ),
                           ],
                         );
                       }),
@@ -140,12 +144,14 @@ class _Song_SState extends State<Song_S> {
     );
   }
 
-  void playaudio() async{
+  void playaudio() async {
     if (isplay == false) {
       await assetsAudioPlayer.play();
       setState(() {
         isplay = true;
-        iconmusic = Icon(Icons.pause_circle_outline,);
+        iconmusic = Icon(
+          Icons.pause_circle_outline,
+        );
       });
     } else {
       assetsAudioPlayer.pause();
