@@ -141,8 +141,6 @@ class _Song_SState extends State<Song_S> {
   }
 
   void playaudio() async{
-
-
     if (isplay == false) {
       await assetsAudioPlayer.play();
       setState(() {
