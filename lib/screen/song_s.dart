@@ -14,7 +14,7 @@ class Song_S extends StatefulWidget {
 class _Song_SState extends State<Song_S> {
   AssetsAudioPlayer assetsAudioPlayer = AssetsAudioPlayer();
   bool isplay = false;
-  Icon iconmusic = Icon(Icons.play_circle_outline);
+  Icon iconmusic = Icon(Icons.play_circle_outline,size: 50,);
   Duration tdu = Duration(seconds: 0);
   Duration cdu = Duration(seconds: 0);
   Imagelist? l1;
@@ -107,7 +107,7 @@ class _Song_SState extends State<Song_S> {
               ),
               Center(
                 child: Container(
-                  height: 600,
+                  height: 650,
                   width: 300,
                   alignment: Alignment.bottomCenter,
                   child: PlayerBuilder.currentPosition(
@@ -150,14 +150,14 @@ class _Song_SState extends State<Song_S> {
       setState(() {
         isplay = true;
         iconmusic = Icon(
-          Icons.pause_circle_outline,
+          Icons.pause_circle_outline,size: 50,
         );
       });
     } else {
       assetsAudioPlayer.pause();
       setState(() {
         isplay = false;
-        iconmusic = Icon(Icons.play_circle_outline);
+        iconmusic = Icon(Icons.play_circle_outline,size: 50,);
       });
     }
   }
