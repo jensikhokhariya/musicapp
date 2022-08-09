@@ -60,6 +60,7 @@ class _Login_ScreenState extends State<Login_Screen> {
                       child: Expanded(
                         child: ElevatedButton(
                           onPressed: () {
+                            Shared().createShr(email: e1.text,password: p1.text);
                             Navigator.pushNamed(context, 'login1');
                           },
                           child: Text("Sign Up"),
